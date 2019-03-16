@@ -15,6 +15,8 @@ typedef struct Sprite {
     bool play_animation;
     bool rotated;
 
+    float scale_factor;
+
     vec2i_t dimension;
     vec2i_t position;
 
