@@ -5,6 +5,8 @@
 
 typedef struct Game {
     SDL_Renderer* renderer;
+
+    player_t* player;
 } game_t;
 
 game_t* game_create(SDL_Renderer* renderer);
