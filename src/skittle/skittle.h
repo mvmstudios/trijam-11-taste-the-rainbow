@@ -12,7 +12,7 @@ typedef struct Skittle {
     hitbox_t hitbox;
 } skittle_t;
 
-skittle_t* skittle_create();
+skittle_t* skittle_create(vec2i_t init_pos);
 
 void skittle_update(skittle_t* skittle, float global_time);
 
