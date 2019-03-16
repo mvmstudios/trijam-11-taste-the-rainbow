@@ -12,10 +12,12 @@ typedef struct Player {
     vec2i_t position;
 } player_t;
 
-player_t* player_create(Game* game, vec2i_t start_position);
+player_t* player_create(game_t* game, vec2i_t start_position);
 // void player_destroy();
 
 void player_update(player_t* player);
 void player_render(const player_t* player);
+
+void player_keyboard_input(player_t* player, const Uint8* const keyboard_state);
 
 #endif
