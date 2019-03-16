@@ -14,7 +14,7 @@ typedef struct Skittle {
 
 skittle_t* skittle_create();
 
-void skittle_update(skittle_t* skittle, uint64_t global_time);
+void skittle_update(skittle_t* skittle, float global_time);
 
 void skittle_render(skittle_t* skittle);
 
