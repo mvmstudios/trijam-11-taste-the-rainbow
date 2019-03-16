@@ -4,6 +4,13 @@
 #include <SDL2/SDL.h>
 
 #include "game.h"
+#include "player/player.h"
+
+int window_width = 800;
+int window_height = 600;
+
+float global_time = 0;
+uint64_t frame_count = 0;
 
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
@@ -11,7 +18,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("Trijam 11", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+    SDL_Window* window = SDL_CreateWindow("Trijam 11", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_RESIZABLE);
     if (!window) {
         printf("error creating window: %s\n", SDL_GetError());
 
@@ -37,9 +44,6 @@ int main(int argc, char** argv) {
     uint64_t performance_counter = SDL_GetPerformanceCounter();
 
     float delta_time = 0;
-    uint64_t frame_count = 0;
-
-    float global_time = 0;
 
     bool close_requested = false;
     while (!close_requested) {

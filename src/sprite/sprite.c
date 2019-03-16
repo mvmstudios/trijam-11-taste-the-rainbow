@@ -8,6 +8,8 @@
 
 #include "../math/mvmath.h"
 
+extern uint64_t frame_count;
+
 sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool play_animation, bool rotated, vec2i_t dimension, int start_index, vec2i_t animation_range) {
     sprite_t* sprite = malloc(sizeof(sprite_t));
 
@@ -27,11 +29,16 @@ sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool
     sprite->current_sprite_index = start_index;
     sprite->current_animation_range = animation_range;
 
+    sprite->update_each_nth_frame = 5;
+
     return sprite;
 }
 
 void sprite_update(sprite_t* sprite) {
     if (!(sprite->play_animation))
+        return;
+
+    if (!(frame_count % sprite->update_each_nth_frame == 0))
         return;
 
     sprite->current_sprite_index++;
@@ -42,5 +49,6 @@ void sprite_update(sprite_t* sprite) {
 void sprite_render(const sprite_t* sprite) {
     SDL_Rect src_rect = { sprite->dimension.x * sprite->current_sprite_index, 0, sprite->dimension.x, sprite->dimension.y };
     SDL_Rect dest_rect = { sprite->position.x, sprite->position.y, (float) sprite->dimension.x * sprite->scale_factor, (float) sprite->dimension.y * sprite->scale_factor };
+    
     SDL_RenderCopyEx(sprite->renderer, sprite->sprite_texture, &src_rect, &dest_rect, 0, NULL, sprite->rotated);
 }

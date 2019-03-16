@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 
+#include "player/player.h"
+
 typedef struct Game {
     SDL_Renderer* renderer;
 

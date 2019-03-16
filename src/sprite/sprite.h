@@ -16,6 +16,7 @@ typedef struct Sprite {
     bool rotated;
 
     float scale_factor;
+    int update_each_nth_frame;
 
     vec2i_t dimension;
     vec2i_t position;

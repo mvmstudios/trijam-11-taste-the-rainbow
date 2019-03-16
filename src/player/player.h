@@ -3,9 +3,10 @@
 
 #include <stdlib.h>
 
-#include "../game.h"
 #include "../math/mvmath.h"
 #include "../sprite/sprite.h"
+
+typedef struct Game game_t;
 
 typedef struct Player {
     game_t* game;
