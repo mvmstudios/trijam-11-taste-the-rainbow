@@ -3,7 +3,7 @@
 
 typedef struct Vec2i {
     int x;
-    int z;
-} vec2_t;
+    int y;
+} vec2i_t;
 
 #endif
