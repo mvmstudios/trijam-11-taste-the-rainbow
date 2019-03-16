@@ -5,7 +5,10 @@
 hitbox_t* hitbox_create(int x, int y, int width, int height) {
     hitbox_t* hitbox = malloc(sizeof(hitbox_t));
 
-
+    hitbox->x = x;
+    hitbox->y = y;
+    hitbox->width = width;
+    hitbox->height = height;
 
     return hitbox;
 }
@@ -26,7 +29,7 @@ bool hitbox_collide(hitbox_t* hitbox_1, hitbox_t* hitbox_2) {
     return false;
 }
 
-void hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer) {
+bool hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer) {
     SDL_Rect rect = {hitbox->x, hitbox->y, hitbox->width, hitbox->height};
 
     SDL_SetRenderDrawColor(renderer, 0, 255, 130, 255);
