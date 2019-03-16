@@ -15,12 +15,12 @@ typedef struct Sprite {
     bool play_animation;
     bool rotated;
 
-    float scale_factor;
+    vec2i_t size;
     int update_each_nth_frame;
 
-    vec2i_t dimension;
     vec2i_t position;
 
+    vec2i_t sprite_dimension;
     int current_sprite_index;
     vec2i_t current_animation_range;
 } sprite_t;

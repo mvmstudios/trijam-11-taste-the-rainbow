@@ -10,7 +10,7 @@
 
 extern uint64_t frame_count;
 
-sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool play_animation, bool rotated, vec2i_t dimension, int start_index, vec2i_t animation_range) {
+sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool play_animation, bool rotated, vec2i_t sprite_dimension, int start_index, vec2i_t animation_range) {
     sprite_t* sprite = malloc(sizeof(sprite_t));
 
     sprite->renderer = renderer;
@@ -23,9 +23,9 @@ sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool
 
     sprite->play_animation = play_animation;
     sprite->rotated = rotated;
-    sprite->scale_factor = 1.0;
+    sprite->size = sprite_dimension;
     sprite->position = (vec2i_t) { 0, 0 };
-    sprite->dimension = dimension;
+    sprite->sprite_dimension = sprite_dimension;
     sprite->current_sprite_index = start_index;
     sprite->current_animation_range = animation_range;
 
@@ -47,8 +47,8 @@ void sprite_update(sprite_t* sprite) {
 }
 
 void sprite_render(const sprite_t* sprite) {
-    SDL_Rect src_rect = { sprite->dimension.x * sprite->current_sprite_index, 0, sprite->dimension.x, sprite->dimension.y };
-    SDL_Rect dest_rect = { sprite->position.x, sprite->position.y, (float) sprite->dimension.x * sprite->scale_factor, (float) sprite->dimension.y * sprite->scale_factor };
+    SDL_Rect src_rect = { sprite->sprite_dimension.x * sprite->current_sprite_index, 0, sprite->sprite_dimension.x, sprite->sprite_dimension.y };
+    SDL_Rect dest_rect = { sprite->position.x, sprite->position.y, sprite->size.x, sprite->size.y};
     
     SDL_RenderCopyEx(sprite->renderer, sprite->sprite_texture, &src_rect, &dest_rect, 0, NULL, sprite->rotated);
 }
