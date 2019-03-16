@@ -7,6 +7,7 @@
 #include "../sprite/sprite.h"
 #include "../hitbox/hitbox.h"
 
+typedef struct Floor floor_t;
 typedef struct Game game_t;
 
 typedef enum PlayerFacing {
