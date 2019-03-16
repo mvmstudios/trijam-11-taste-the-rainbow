@@ -51,7 +51,12 @@ int main(int argc, char** argv) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT)
                 close_requested = true;
-            else
+            else if(event.type == SDL_WINDOWEVENT) {
+                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                    window_width = event.window.data1;
+                    window_height = event.window.data2;
+                }
+            } else
                 game_event(game, event);
         }
 
