@@ -29,13 +29,44 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    const Uint8* const keyboard_state = SDL_GetKeyboardState(NULL);
+
+    game_t* game = game_create(renderer);
+
+    uint64_t performance_frequency = SDL_GetPerformanceFrequency();
+    uint64_t performance_counter = SDL_GetPerformanceCounter();
+
+    float delta_time = 0;
+    uint64_t frame_count = 0;
+
+    float global_time = 0;
+
     bool close_requested = false;
     while (!close_requested) {
         SDL_Event event;
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT)
                 close_requested = true;
+            else
+                game_event(game, event);
         }
+
+        global_time += delta_time;
+
+        game_keyboard_input(game, keyboard_state);
+        game_update(game, delta_time, global_time, frame_count);
+        game_render(game);
+
+        SDL_RenderPresent(renderer);
+    
+        uint64_t performance_counter_at_end = SDL_GetPerformanceCounter();
+        uint64_t elapsed = performance_counter_at_end - performance_counter;
+
+        delta_time = (float) elapsed / (float) performance_frequency;
+
+        performance_counter = performance_counter_at_end;
+
+        frame_count++;
     }
 
     SDL_DestroyRenderer(renderer);
