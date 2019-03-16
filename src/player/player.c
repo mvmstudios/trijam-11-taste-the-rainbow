@@ -16,8 +16,10 @@ player_t* player_create(game_t* game, vec2i_t start_position) {
 
     player->sprite->position = start_position;
 
-    player->sprite->scale_factor = 5;
+    player->sprite->size = (vec2i_t) {64, 64};
     player->sprite->update_each_nth_frame = 10;
+
+    player->hitbox = hitbox_create(player->position.x, player->position.y, player->sprite->size.x, player->sprite->size.y);
 
     return player;
 }
