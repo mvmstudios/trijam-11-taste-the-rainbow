@@ -24,6 +24,6 @@ sprite_t* sprite_create(const char* path_to_sprite, bool play_animation, vec2i_t
 
 void sprite_update(sprite_t* sprite);
 
-void sprite_render(sprite_t* sprite);
+void sprite_render(const sprite_t* sprite);
 
 #endif
