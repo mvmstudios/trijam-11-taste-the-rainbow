@@ -1,12 +1,15 @@
 #ifndef SPRITE_H_
 #define SPRITE_H_
 
+#include <stdbool.h>
+
 #include <SDL2/SDL_image.h>
 
 #include "../math/mvmath.h"
 
 typedef struct Sprite {
     SDL_Texture* sprite_texture;
+    
 
     bool play_animation;
 
@@ -21,6 +24,6 @@ sprite_t* sprite_create(const char* path_to_sprite, bool play_animation, vec2i_t
 
 void sprite_update(sprite_t* sprite);
 
-void sprite_render(sprite_t* sprite);
+void sprite_render(sprite_t* sprite, vec2i_t position);
 
 #endif
