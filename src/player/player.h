@@ -5,11 +5,14 @@
 
 #include "../game.h"
 #include "../math/mvmath.h"
+#include "../sprite/sprite.h"
 
 typedef struct Player {
     game_t* game;
 
     vec2i_t position;
+
+    sprite_t* sprite;
 } player_t;
 
 player_t* player_create(game_t* game, vec2i_t start_position);
