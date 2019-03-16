@@ -11,8 +11,8 @@ typedef struct Skittle {
 
     vec2i_t position;
 
-    sprite_t sprite;
-    hitbox_t hitbox;
+    sprite_t* sprite;
+    hitbox_t* hitbox;
 } skittle_t;
 
 skittle_t* skittle_create(game_t* game, vec2i_t init_pos);
