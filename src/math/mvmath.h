@@ -6,12 +6,4 @@ typedef struct Vec2i {
     int y;
 } vec2i_t;
 
-int max_i(int x, int y) {
-    return x > y ? x : y;
-}
-
-int min_i(int x, int y) {
-    return x < y ? x : y;
-}
-
 #endif
