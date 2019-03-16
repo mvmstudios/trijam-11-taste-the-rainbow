@@ -12,15 +12,12 @@ player_t* player_create(game_t* game, vec2i_t start_position) {
 
     player->game = game;
     player->position = start_position;
-    player->sprite = sprite_create(game->renderer, "assets/img/llama.png", true, false, (vec2i_t) {48, 48}, 0, (vec2i_t) {0, 5});
+    player->sprite = sprite_create(game->renderer, "assets/img/player-sprite.png", true, false, (vec2i_t) {16, 16}, 0, (vec2i_t) {0, 2});
 
     player->sprite->position = start_position;
 
-    printf("w: %d\n", window_width);
-
-    player->sprite->scale_factor = (float) window_width * 0;
-
-    printf("s: %f\n", (float) window_width * 0.20);
+    player->sprite->scale_factor = 5;
+    player->sprite->update_each_nth_frame = 10;
 
     return player;
 }
