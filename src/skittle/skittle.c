@@ -1,11 +1,16 @@
 #include "skittle.h"
 
+#include <stdbool.h>
+
+#include "../game.h"
+
 #include "../math/mvmath.h"
 #include "../sprite/sprite.h"
 #include "../hitbox/hitbox.h"
 #include "../floor/floor.h"
 
 extern floor_t* _floor;
+extern bool debug;
 
 skittle_t* skittle_create(game_t* game, vec2i_t init_pos) {
     skittle_t* skittle = malloc(sizeof(skittle_t));
@@ -26,9 +31,11 @@ void skittle_update(skittle_t* skittle, float global_time) {
     }
 
     skittle->hitbox->y = skittle->position.y;
-    skittle->sprite->position.x = skittle->position.y;
+    skittle->sprite->position.y = skittle->position.y;
 }
 
 void skittle_render(skittle_t* skittle) {
     sprite_render(skittle->sprite);
+    if (debug)
+        hitbox_render(skittle->hitbox, skittle->game->renderer);
 }

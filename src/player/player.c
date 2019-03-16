@@ -23,7 +23,7 @@ player_t* player_create(game_t* game, vec2i_t start_position) {
    // player->sprite->size = (vec2i_t) { window_width * 0.20, window_width * 0.2 };
     player->sprite->update_each_nth_frame = 10;
 
-    player->hitbox = hitbox_create(player->position.x, player->position.y, player->sprite->size.x, player->sprite->size.y);
+    player->hitbox = hitbox_create(player->position.x, player->position.y, player->sprite->size.x - 5, player->sprite->size.y);
 
     return player;
 }

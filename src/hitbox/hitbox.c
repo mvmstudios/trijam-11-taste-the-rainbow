@@ -32,7 +32,10 @@ bool hitbox_collide(hitbox_t* hitbox_1, hitbox_t* hitbox_2) {
 bool hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer) {
     SDL_Rect rect = {hitbox->x, hitbox->y, hitbox->width, hitbox->height};
 
-    SDL_SetRenderDrawColor(renderer, 0, 255, 130, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawRect(renderer, &rect);
+    SDL_SetRenderDrawColor(renderer, 150, 255, 150, 100);
+    
+    SDL_RenderFillRect(renderer, &rect);
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 }

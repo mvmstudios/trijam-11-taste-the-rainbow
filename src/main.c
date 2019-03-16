@@ -36,6 +36,8 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
     const Uint8* const keyboard_state = SDL_GetKeyboardState(NULL);
 
     game_t* game = game_create(renderer);
