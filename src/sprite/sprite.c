@@ -42,7 +42,7 @@ void sprite_update(sprite_t* sprite) {
         return;
 
     sprite->current_sprite_index++;
-    if (sprite->current_sprite_index >= sprite->current_animation_range.y)
+    if (sprite->current_sprite_index > sprite->current_animation_range.y)
         sprite->current_sprite_index = sprite->current_animation_range.x;
 }
 
