@@ -9,10 +9,18 @@
 
 typedef struct Game game_t;
 
+typedef enum PlayerFacing {
+    PLAYER_FACING_LEFT,
+    PLAYER_FACING_RIGHT,
+    PLAYER_FACING_UP
+} player_facing_t;
+
 typedef struct Player {
     game_t* game;
 
     vec2i_t position;
+
+    player_facing_t facing;
 
     sprite_t* sprite;
     hitbox_t* hitbox;
@@ -25,5 +33,7 @@ void player_update(player_t* player);
 void player_render(const player_t* player);
 
 void player_keyboard_input(player_t* player, const Uint8* const keyboard_state);
+
+void player_move_to(player_t* player, vec2i_t position);
 
 #endif
