@@ -5,6 +5,7 @@
 
 #include "../math/mvmath.h"
 #include "../sprite/sprite.h"
+#include "../hitbox/hitbox.h"
 
 typedef struct Game game_t;
 
@@ -14,6 +15,7 @@ typedef struct Player {
     vec2i_t position;
 
     sprite_t* sprite;
+    hitbox_t* hitbox;
 } player_t;
 
 player_t* player_create(game_t* game, vec2i_t start_position);
