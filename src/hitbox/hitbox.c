@@ -29,12 +29,18 @@ bool hitbox_collide(hitbox_t* hitbox_1, hitbox_t* hitbox_2) {
     return false;
 }
 
-void hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer) {
+void hitbox_render_colored(hitbox_t* hitbox, SDL_Renderer* renderer, vec4i_t outline_color, vec4i_t fill_color) {
     SDL_Rect rect = {hitbox->x, hitbox->y, hitbox->width, hitbox->height};
 
-    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+    SDL_SetRenderDrawColor(renderer, outline_color.x, outline_color.y, outline_color.z, outline_color.w);
     SDL_RenderDrawRect(renderer, &rect);
-    SDL_SetRenderDrawColor(renderer, 150, 255, 150, 100);
+    
+    SDL_SetRenderDrawColor(renderer, fill_color.x, fill_color.y, fill_color.z, fill_color.w);
     SDL_RenderFillRect(renderer, &rect);
+
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+}
+
+void hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer) {
+    hitbox_render_colored(hitbox, renderer, (vec4i_t) { 255, 0, 0, 255 }, (vec4i_t) { 130, 130, 130, 100 });
 }
