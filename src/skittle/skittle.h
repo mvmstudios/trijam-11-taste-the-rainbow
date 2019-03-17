@@ -12,6 +12,9 @@ typedef struct Skittle {
     game_t* game;
 
     bool disabled;
+    bool landed;
+
+    float landed_time;
 
     vec2i_t position;
 
