@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    SDL_Window* window = SDL_CreateWindow("Trijam 11", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_RESIZABLE);
+    SDL_Window* window = SDL_CreateWindow("Trijam 11", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, window_width, window_height, SDL_WINDOW_RESIZABLE);
     if (!window) {
         printf("error creating window: %s\n", SDL_GetError());
 
@@ -36,6 +36,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
+    SDL_RenderSetLogicalSize(renderer, window_width, window_height);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     const Uint8* const keyboard_state = SDL_GetKeyboardState(NULL);
@@ -53,12 +54,7 @@ int main(int argc, char** argv) {
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT)
                 close_requested = true;
-            else if(event.type == SDL_WINDOWEVENT) {
-                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-                    window_width = event.window.data1;
-                    window_height = event.window.data2;
-                }
-            } else
+            else
                 game_event(game, event);
         }
 
