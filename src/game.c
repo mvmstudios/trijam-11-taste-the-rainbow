@@ -19,14 +19,14 @@ extern int window_height;
 typedef struct SkittleDropper {
     game_t* game;
 
-    vec2i_t velocity;
+    vec2f_t velocity;
     hitbox_t* hitbox;
 } skittle_dropper_t;
 
 skittle_dropper_t* skittle_dropper_create(game_t* game, vec2i_t init_pos) {
     skittle_dropper_t* dropper = malloc(sizeof(skittle_dropper_t));
 
-    dropper->velocity = (vec2i_t) { 3, 0 };
+    dropper->velocity = (vec2f_t) { 3.0, 0.0 };
     dropper->game = game;
     dropper->hitbox = hitbox_create(init_pos.x, init_pos.y, 50, 50);
 
@@ -49,6 +49,7 @@ void skittle_dropper_update(skittle_dropper_t* dropper, uint64_t frame_count) {
     // only works properly with vsync
     if (frame_count % 60 * 2 == 0) {
         skittles[current_skittle_index++] = skittle_create(dropper->game, (vec2i_t) {dropper->hitbox->x, dropper->hitbox->y});
+        dropper->velocity.x += 0.02;
     }
 
 }
