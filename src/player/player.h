@@ -6,8 +6,8 @@
 #include "../math/mvmath.h"
 #include "../sprite/sprite.h"
 #include "../hitbox/hitbox.h"
-#include "../skittle/skittle.h"
 
+typedef struct Skittle skittle_t;
 typedef struct Floor floor_t;
 typedef struct Game game_t;
 
@@ -19,6 +19,8 @@ typedef enum PlayerFacing {
 
 typedef struct Player {
     game_t* game;
+
+    int score;
 
     vec2i_t position;
 
