@@ -37,7 +37,6 @@ sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool
 void sprite_destroy(sprite_t* sprite) {
     free(sprite->sprite_texture);
     free(sprite);
-    
 }
 
 void sprite_update(sprite_t* sprite) {
