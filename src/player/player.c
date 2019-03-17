@@ -98,3 +98,15 @@ void player_eat_skittle(player_t* player, skittle_t* skittle) {
 
     player->sprite->current_sprite_index = 3;
 }
+
+void player_damage(player_t* player, int damage) {
+    player->hearts -= damage;
+
+    if (player->hearts < 1) {
+        player_die(player);
+    }
+}
+
+void player_die(player_t* player) {
+    
+}
