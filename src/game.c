@@ -75,6 +75,8 @@ game_t* game_create(SDL_Renderer* renderer) {
     game_t* game = malloc(sizeof(game_t));
 
     game->renderer = renderer;
+   
+    game->game_state = GAME_STATE_MENU;
     game->player = player_create(game, (vec2i_t) {0, 0});
 
     rainbow_sprite = sprite_create(renderer, "assets/img/rainbow-sprite.png", false, false, (vec2i_t) { 256, 53 }, 0, (vec2i_t) {0, 0});
@@ -98,28 +100,40 @@ void game_destroy(game_t* game) {
 }
 
 void game_update(game_t* game, const float delta_time, const float global_time, const uint64_t frame_count) {
-    player_update(game->player);
-    floor_update(_floor);
+    if (game->game_state == GAME_STATE_MENU) {
 
-    skittle_dropper_update(skittle_dropper, frame_count);
+    }
 
-    for (int i = 0; i < current_skittle_index; i++)
-        skittle_update(skittles[i], global_time);
+    if (game->game_state == GAME_STATE_RUNNING) {
+        player_update(game->player);
+        floor_update(_floor);
+
+        skittle_dropper_update(skittle_dropper, frame_count);
+
+        for (int i = 0; i < current_skittle_index; i++)
+            skittle_update(skittles[i], global_time);
+    }
 }
 
 void game_render(const game_t* game) {
-    SDL_SetRenderDrawColor(game->renderer, 137, 229, 255, 255);
-    SDL_RenderClear(game->renderer);
-    player_render(game->player);
-    floor_render(_floor);
+    if (game->game_state == GAME_STATE_MENU) {
+
+    }
+
+    if (game->game_state == GAME_STATE_RUNNING) {
+        SDL_SetRenderDrawColor(game->renderer, 137, 229, 255, 255);
+        SDL_RenderClear(game->renderer);
+        player_render(game->player);
+        floor_render(_floor);
 
 
-    skittle_dropper_render(skittle_dropper);
+        skittle_dropper_render(skittle_dropper);
 
-    for (int i = 0; i < current_skittle_index; i++)
-        skittle_render(skittles[i]);
-    
-    sprite_render(rainbow_sprite);
+        for (int i = 0; i < current_skittle_index; i++)
+            skittle_render(skittles[i]);
+
+        sprite_render(rainbow_sprite);
+    }
 }
 
 void game_event(game_t* game, const SDL_Event event) {
@@ -137,6 +151,10 @@ void game_event(game_t* game, const SDL_Event event) {
                     else
                         Mix_PauseMusic();
                 }
+                break;
+            case SDL_SCANCODE_SPACE:
+                if (game->game_state == GAME_STATE_MENU)
+                    game->game_state = GAME_STATE_RUNNING;
                 break;
         }
     }

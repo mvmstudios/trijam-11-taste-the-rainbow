@@ -5,9 +5,16 @@
 
 #include "player/player.h"
 
+typedef enum GameState {
+    GAME_STATE_MENU,
+    GAME_STATE_PAUSE,
+    GAME_STATE_RUNNING
+} game_state_t;
+
 typedef struct Game {
     SDL_Renderer* renderer;
 
+    game_state_t game_state;
     player_t* player;
 } game_t;
 
