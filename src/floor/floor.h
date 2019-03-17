@@ -19,6 +19,8 @@ typedef struct Floor {
 
 floor_t* floor_create(game_t* game);
 
+void floor_destroy(floor_t* floor);
+
 void floor_update(floor_t* floor);
 
 void floor_render(floor_t* floor);

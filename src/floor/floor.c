@@ -21,6 +21,11 @@ floor_t* floor_create(game_t* game) {
     return _floor;
 }
 
+void floor_destory(floor_t* floor) {
+    free(floor->floor_sprite);
+    free(floor);
+}
+
 void floor_update(floor_t* floor) {
     floor->floor_sprite->size.x = window_width;
     floor->floor_sprite->size.y = window_height * 0.15;
