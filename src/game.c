@@ -14,6 +14,7 @@
 bool debug = false;
 
 sprite_t* rainbow_sprite;
+sprite_t* heart_sprite;
 
 floor_t* _floor;
 skittle_t** skittles;
@@ -86,6 +87,10 @@ game_t* game_create(SDL_Renderer* renderer) {
     rainbow_sprite->size.x = window_width;
     rainbow_sprite->size.y = window_height * 0.20;
 
+    heart_sprite = sprite_create(renderer, "assets/img/heart.png", false, false, (vec2i_t) { 13, 12 }, 0, (vec2i_t) { 0, 0 });
+    heart_sprite->size.x = 48;
+    heart_sprite->size.y = 48;
+
     skittles = malloc(sizeof(skittle_t*) * 1024);
     bombs = malloc(sizeof(bomb_t) * 1024);
 
@@ -145,6 +150,12 @@ void game_render(const game_t* game) {
             bomb_render(bombs[i]);
 
         sprite_render(rainbow_sprite);
+
+        // there is a better method!
+        for (int x = 0; x < game->player->hearts * heart_sprite->size.x; x += heart_sprite->size.x) {
+            heart_sprite->position.x = x;
+            sprite_render(heart_sprite);    
+        }
     }
 }
 
