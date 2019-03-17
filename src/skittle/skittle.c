@@ -10,7 +10,10 @@
 #include "../sprite/sprite.h"
 #include "../hitbox/hitbox.h"
 #include "../floor/floor.h"
+#include "../bomb/bomb.h"
 
+extern int current_bomb_index; 
+extern bomb_t** bombs;
 extern floor_t* _floor;
 extern bool debug;
 
@@ -46,8 +49,11 @@ void skittle_update(skittle_t* skittle, float global_time) {
         if (!skittle->landed) {
             skittle->landed = true;
             skittle->landed_time = global_time;
-        } else if (global_time - skittle->landed_time > 5.0)
+        } else if (global_time - skittle->landed_time > 5.0) {
             skittle->disabled = true;
+
+            bombs[current_bomb_index++] = bomb_create(skittle->game, (vec2i_t) {skittle->position.x, 0});
+        }
     }
 
     printf("%f\n", global_time);
