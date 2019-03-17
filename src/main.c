@@ -44,13 +44,13 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    if (!TTF_Init()) {
+    /*if (!TTF_Init()) {
         return -1;
-    }
+    }*/
 
-    font = TTF_OpenFont("assets/font/bulky.TTF", 28);
+    /*font = TTF_OpenFont("assets/font/bulky.TTF", 28);
     if (font == NULL)
-        return -1;
+        return -1;*/
 
     SDL_RenderSetLogicalSize(renderer, window_width, window_height);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
