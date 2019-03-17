@@ -27,6 +27,9 @@ typedef struct Player {
 
     player_facing_t facing;
 
+    bool sprinting;
+    float stamina;
+
     sprite_t* sprite;
     hitbox_t* hitbox;
 } player_t;
