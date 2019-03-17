@@ -2,6 +2,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "../game.h"
 
@@ -41,7 +42,15 @@ void skittle_update(skittle_t* skittle, float global_time) {
 
     if (!hitbox_collide(skittle->hitbox, _floor->hitbox)) {
         skittle->position.y += 2;
+    } else {
+        if (!skittle->landed) {
+            skittle->landed = true;
+            skittle->landed_time = global_time;
+        } else if (global_time - skittle->landed_time > 5.0)
+            skittle->disabled = true;
     }
+
+    printf("%f\n", global_time);
 
     if (hitbox_collide(skittle->hitbox, skittle->game->player->hitbox))
         player_eat_skittle(skittle->game->player, skittle);
