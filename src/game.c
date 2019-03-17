@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 
+#include <SDL2/SDL_mixer.h>
+
 #include "player/player.h"
 #include "hitbox/hitbox.h"
 #include "sprite/sprite.h"
@@ -19,6 +21,8 @@ int current_skittle_index = 0;
 
 extern int window_width;
 extern int window_height;
+
+Mix_Music* default_theme_music;
 
 typedef struct SkittleDropper {
     game_t* game;
@@ -79,8 +83,12 @@ game_t* game_create(SDL_Renderer* renderer) {
 
     skittles = malloc(sizeof(skittle_t*) * 1024);
 
+    default_theme_music =  Mix_LoadMUS("assets/sound/def_theme.wav");
+
     _floor = floor_create(game);
     skittle_dropper = skittle_dropper_create(game, (vec2i_t) {0, 0});
+
+    Mix_PlayMusic(default_theme_music, -1);
 
     return game;
 }
@@ -116,8 +124,21 @@ void game_render(const game_t* game) {
 
 void game_event(game_t* game, const SDL_Event event) {
     if (event.type == SDL_KEYDOWN) {
-        if (event.key.keysym.scancode == SDL_SCANCODE_O)
-            debug = !debug;
+        switch (event.key.keysym.scancode) {
+            case SDL_SCANCODE_O: 
+                debug = !debug;
+                break;
+            case SDL_SCANCODE_P:
+                if (Mix_PlayingMusic() == 0)
+                    Mix_PlayMusic(default_theme_music, -1);
+                else {
+                    if (Mix_PausedMusic() == 1)
+                        Mix_ResumeMusic();
+                    else
+                        Mix_PauseMusic();
+                }
+                break;
+        }
     }
 }
 
