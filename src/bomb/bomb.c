@@ -68,4 +68,6 @@ void bomb_render(bomb_t* bomb) {
 void bomb_explode(bomb_t* bomb) {
     bomb->bomb_state = BOMB_STATE_EXPLODING;
     bomb->sprite->current_sprite_index = 1;
+
+    player_damage(bomb->game->player, 1);
 }
