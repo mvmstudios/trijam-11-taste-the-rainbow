@@ -6,6 +6,7 @@
 #include "../math/mvmath.h"
 #include "../sprite/sprite.h"
 #include "../hitbox/hitbox.h"
+#include "../skittle/skittle.h"
 
 typedef struct Floor floor_t;
 typedef struct Game game_t;
@@ -36,5 +37,7 @@ void player_render(const player_t* player);
 void player_keyboard_input(player_t* player, const Uint8* const keyboard_state);
 
 void player_move_to(player_t* player, vec2i_t position);
+
+void player_eat_skittle(player_t* player, skittle_t* skittle);
 
 #endif
