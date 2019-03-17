@@ -1,6 +1,7 @@
 #include "skittle.h"
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include "../game.h"
 
@@ -26,6 +27,8 @@ skittle_t* skittle_create(game_t* game, vec2i_t init_pos) {
 
     skittle->sprite->size.x = 9 * 3;
     skittle->sprite->size.y = 4 * 3;
+
+    skittle->sprite->current_sprite_index = rand() % 3;
 
     skittle->hitbox = hitbox_create(skittle->position.x, skittle->position.y, skittle->sprite->size.x, skittle->sprite->size.y);
 
