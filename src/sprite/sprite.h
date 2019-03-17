@@ -26,7 +26,8 @@ typedef struct Sprite {
 } sprite_t;
 
 sprite_t* sprite_create(SDL_Renderer* renderer, const char* path_to_sprite, bool play_animation, bool rotated, vec2i_t dimension, int start_index, vec2i_t animation_range);
-// void sprite_destroy();
+
+void sprite_destroy(sprite_t* sprite);
 
 void sprite_update(sprite_t* sprite);
 
