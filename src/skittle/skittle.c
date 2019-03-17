@@ -15,15 +15,18 @@ extern bool debug;
 skittle_t* skittle_create(game_t* game, vec2i_t init_pos) {
     skittle_t* skittle = malloc(sizeof(skittle_t));
 
+    skittle->game = game;
+
     skittle->position = init_pos;
     
     skittle->sprite = sprite_create(game->renderer, "assets/img/skittle-sprite.png", false, false, (vec2i_t) {9, 4}, 0, (vec2i_t) {0, 0});
-    skittle->hitbox = hitbox_create(init_pos.x, init_pos.y, skittle->sprite->size.x, skittle->sprite->size.y);
 
     skittle->sprite->position = init_pos;
 
     skittle->sprite->size.x = 9 * 3;
     skittle->sprite->size.y = 4 * 3;
+
+    skittle->hitbox = hitbox_create(skittle->position.x, skittle->position.y, skittle->sprite->size.x, skittle->sprite->size.y);
 
     return skittle;
 }
@@ -35,10 +38,12 @@ void skittle_update(skittle_t* skittle, float global_time) {
 
     skittle->hitbox->y = skittle->position.y;
     skittle->sprite->position.y = skittle->position.y;
+
+    printf("sprite -> %d | hitbox -> %d\n", skittle->sprite->position.y, skittle->hitbox->y);
 }
 
 void skittle_render(skittle_t* skittle) {
     sprite_render(skittle->sprite);
     if (debug)
-        hitbox_render(skittle->hitbox, skittle->game->renderer);
+        hitbox_render_colored(skittle->hitbox, skittle->game->renderer, (vec4i_t) {255, 114, 247, 255}, (vec4i_t) { 119, 99, 249, 100 });
 }
