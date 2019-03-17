@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <SDL2/SDL_mixer.h>
+
 #include "../game.h"
 
 #include "../math/mvmath.h"
@@ -13,6 +15,8 @@
 
 extern floor_t* _floor;
 extern bool debug;
+
+extern Mix_Chunk* explode_effect_sound;
 
 bomb_t* bomb_create(game_t* game, vec2i_t init_pos) {
     bomb_t* bomb = malloc(sizeof(bomb_t));
@@ -66,6 +70,8 @@ void bomb_render(bomb_t* bomb) {
 }
 
 void bomb_explode(bomb_t* bomb) {
+    Mix_PlayChannel(-1, explode_effect_sound, 0);
+
     bomb->bomb_state = BOMB_STATE_EXPLODING;
     bomb->sprite->current_sprite_index = 1;
 
