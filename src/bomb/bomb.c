@@ -77,3 +77,11 @@ void bomb_explode(bomb_t* bomb) {
 
     player_damage(bomb->game->player, 1);
 }
+
+void bomb_mouse_event(bomb_t* bomb, SDL_MouseButtonEvent event) {
+    if (event.x > bomb->hitbox->x && event.x < bomb->hitbox->x + bomb->hitbox->width) {
+        if (event.y > bomb->hitbox->y && event.y < bomb->hitbox->y + bomb->hitbox->height) {
+            bomb->disabled = true;
+        }
+    }
+}

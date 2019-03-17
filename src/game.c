@@ -82,7 +82,7 @@ game_t* game_create(SDL_Renderer* renderer) {
 
     game->renderer = renderer;
    
-    game->game_state = GAME_STATE_MENU;
+    game->game_state = GAME_STATE_RUNNING;
     game->player = player_create(game, (vec2i_t) {0, 0});
 
     rainbow_sprite = sprite_create(renderer, "assets/img/rainbow-sprite.png", false, false, (vec2i_t) { 256, 53 }, 0, (vec2i_t) {0, 0});
@@ -165,6 +165,11 @@ void game_render(const game_t* game) {
 }
 
 void game_event(game_t* game, const SDL_Event event) {
+    if (event.type == SDL_MOUSEBUTTONDOWN) {
+        for (int i = 0; i < current_bomb_index; i++)
+            bomb_mouse_event(bombs[i], event.button);
+    }
+
     if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.scancode) {
             case SDL_SCANCODE_O: 

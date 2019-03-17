@@ -16,6 +16,8 @@ uint64_t frame_count = 0;
 
 TTF_Font* font;
 
+vec2i_t mouse_position;
+
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) != 0) {
         printf("error initializing sdl: %s\n", SDL_GetError());
@@ -54,6 +56,10 @@ int main(int argc, char** argv) {
 
     SDL_RenderSetLogicalSize(renderer, window_width, window_height);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+
+    mouse_position = (vec2i_t) {0, 0};
+
+    SDL_GetMouseState(&mouse_position.x, &mouse_position.y);
 
     const Uint8* const keyboard_state = SDL_GetKeyboardState(NULL);
 

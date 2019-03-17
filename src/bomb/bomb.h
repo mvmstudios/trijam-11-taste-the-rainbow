@@ -36,4 +36,6 @@ void bomb_render(bomb_t* bomb);
 
 void bomb_explode(bomb_t* bomb);
 
+void bomb_mouse_event(bomb_t* bomb, SDL_MouseButtonEvent event);
+
 #endif
