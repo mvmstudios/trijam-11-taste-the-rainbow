@@ -21,6 +21,7 @@ typedef struct Player {
     game_t* game;
 
     int score;
+    int hearts;
 
     vec2i_t position;
 
@@ -41,5 +42,9 @@ void player_keyboard_input(player_t* player, const Uint8* const keyboard_state);
 void player_move_to(player_t* player, vec2i_t position);
 
 void player_eat_skittle(player_t* player, skittle_t* skittle);
+
+void player_damage(player_t* player, int damage_amount);
+
+void player_die(player_t* player);
 
 #endif
