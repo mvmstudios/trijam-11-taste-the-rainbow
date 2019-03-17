@@ -23,7 +23,9 @@ player_t* player_create(game_t* game, vec2i_t start_position) {
 
     player->sprite->position = start_position;
     player->facing = PLAYER_FACING_RIGHT;
+    
 
+    player->hearts = 3;
    // player->sprite->size = (vec2i_t) { window_width * 0.20, window_width * 0.2 };
     player->sprite->update_each_nth_frame = 10;
 
@@ -108,5 +110,5 @@ void player_damage(player_t* player, int damage) {
 }
 
 void player_die(player_t* player) {
-    
+
 }
