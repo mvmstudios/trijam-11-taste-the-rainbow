@@ -32,6 +32,11 @@ player_t* player_create(game_t* game, vec2i_t start_position) {
  * floor shit**
  */
 void player_update(player_t* player) {
+    if (player->position.x > window_width - player->sprite->size.x)
+        player->position.x = window_width - player->sprite->size.x;
+    if (player->position.x < 0)
+        player->position.x = 0;
+
     player->sprite->size = (vec2i_t) { window_width * 0.10, window_width * 0.10 };
     player->hitbox->x = player->position.x;
     player->hitbox->y = player->position.y;
@@ -77,9 +82,4 @@ void player_keyboard_input(player_t* player, const Uint8* const keyboard_state) 
 void player_move_to(player_t* player, vec2i_t position) {
     player->position.x += position.x;
     player->position.y += position.y;
-
-    if (player->position.x > window_width - player->sprite->size.x)
-        player->position.x = window_width - player->sprite->size.x;
-    if (player->position.x < 0)
-        player->position.x = 0;
 }
