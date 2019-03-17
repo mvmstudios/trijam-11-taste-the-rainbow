@@ -3,6 +3,7 @@
 #include <stdbool.h>
 
 #include "../game.h"
+#include "../skittle/skittle.h"
 #include "../sprite/sprite.h"
 
 extern int window_width;
@@ -82,4 +83,9 @@ void player_keyboard_input(player_t* player, const Uint8* const keyboard_state) 
 void player_move_to(player_t* player, vec2i_t position) {
     player->position.x += position.x;
     player->position.y += position.y;
+}
+
+void player_eat_skittle(player_t* player, skittle_t* skittle) {
+    skittle->disabled = true;
+    player->score++;
 }
