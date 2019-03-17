@@ -1,5 +1,7 @@
 #include "hitbox.h"
 
+#include <stdlib.h>
+
 #include <SDL2/SDL.h>
 
 hitbox_t* hitbox_create(int x, int y, int width, int height) {
