@@ -27,7 +27,9 @@ player_t* player_create(game_t* game, vec2i_t start_position) {
    // player->sprite->size = (vec2i_t) { window_width * 0.20, window_width * 0.2 };
     player->sprite->update_each_nth_frame = 10;
 
-    player->hitbox = hitbox_create(player->position.x, player->position.y, player->sprite->size.x - 20, player->sprite->size.y);
+    player->sprite->size = (vec2i_t) { window_width * 0.10, window_width * 0.10 };
+
+    player->hitbox = hitbox_create(player->position.x, player->position.y, player->sprite->size.x - 20, player->sprite->size.y * 0.3 + 10);
 
     pick_up_sound = Mix_LoadWAV("assets/sound/pick.wav");
 
@@ -43,12 +45,11 @@ void player_update(player_t* player) {
     if (player->position.x < 0)
         player->position.x = 0;
 
-    player->sprite->size = (vec2i_t) { window_width * 0.10, window_width * 0.10 };
     player->hitbox->x = player->position.x;
     player->hitbox->y = player->position.y;
 
-    player->hitbox->width = player->sprite->size.x;
-    player->hitbox->height = player->sprite->size.y;
+    //player->hitbox->width = player->sprite->size.x;
+    //player->hitbox->height = player->sprite->size.y;
 
     if (player->facing != PLAYER_FACING_UP)
         player->sprite->rotated = player->facing != PLAYER_FACING_RIGHT;
@@ -91,9 +92,9 @@ void player_move_to(player_t* player, vec2i_t position) {
 }
 
 void player_eat_skittle(player_t* player, skittle_t* skittle) {
+    Mix_PlayChannel(-1, pick_up_sound, 0);
     skittle->disabled = true;
     player->score++;
 
     player->sprite->current_sprite_index = 3;
-    Mix_PlayChannel(-1, pick_up_sound, 0);
 }
