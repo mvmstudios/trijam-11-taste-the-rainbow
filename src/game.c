@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include <stdlib.h>
+
 #include "player/player.h"
 #include "hitbox/hitbox.h"
 #include "sprite/sprite.h"
@@ -7,6 +9,8 @@
 #include "skittle/skittle.h"
 
 bool debug = false;
+
+sprite_t* rainbow_sprite;
 
 floor_t* _floor;
 skittle_t** skittles;
@@ -34,7 +38,9 @@ skittle_dropper_t* skittle_dropper_create(game_t* game, vec2i_t init_pos) {
 }
 
 void skittle_dropper_update(skittle_dropper_t* dropper, uint64_t frame_count) {
-    dropper->hitbox->x += dropper->velocity.x;
+    //dropper->hitbox->x += dropper->velocity.x;
+
+    dropper->hitbox->x = rand() % window_width;
 
     if (dropper->hitbox->x > window_width - dropper->hitbox->width) {
         dropper->hitbox->x = window_width - dropper->hitbox->width;
@@ -66,6 +72,10 @@ game_t* game_create(SDL_Renderer* renderer) {
 
     game->renderer = renderer;
     game->player = player_create(game, (vec2i_t) {0, 0});
+
+    rainbow_sprite = sprite_create(renderer, "assets/img/rainbow-sprite.png", false, false, (vec2i_t) { 256, 53 }, 0, (vec2i_t) {0, 0});
+    rainbow_sprite->size.x = window_width;
+    rainbow_sprite->size.y = window_height * 0.20;
 
     skittles = malloc(sizeof(skittle_t*) * 1024);
 
@@ -100,6 +110,8 @@ void game_render(const game_t* game) {
 
     for (int i = 0; i < current_skittle_index; i++)
         skittle_render(skittles[i]);
+    
+    sprite_render(rainbow_sprite);
 }
 
 void game_event(game_t* game, const SDL_Event event) {
