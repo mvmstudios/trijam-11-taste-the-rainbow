@@ -17,6 +17,7 @@ skittle_t* skittle_create(game_t* game, vec2i_t init_pos) {
 
     skittle->game = game;
 
+    skittle->disabled = false;
     skittle->position = init_pos;
     
     skittle->sprite = sprite_create(game->renderer, "assets/img/skittle-sprite.png", false, false, (vec2i_t) {9, 4}, 0, (vec2i_t) {0, 0});
@@ -32,15 +33,24 @@ skittle_t* skittle_create(game_t* game, vec2i_t init_pos) {
 }
 
 void skittle_update(skittle_t* skittle, float global_time) {
+    if (skittle->disabled)
+        return;
+
     if (!hitbox_collide(skittle->hitbox, _floor->hitbox)) {
         skittle->position.y += 2;
     }
+
+    if (hitbox_collide(skittle->hitbox, skittle->game->player->hitbox))
+        player_eat_skittle(skittle->game->player, skittle);
 
     skittle->hitbox->y = skittle->position.y;
     skittle->sprite->position.y = skittle->position.y;
 }
 
 void skittle_render(skittle_t* skittle) {
+    if (skittle->disabled)
+        return;
+
     sprite_render(skittle->sprite);
     if (debug)
         hitbox_render_colored(skittle->hitbox, skittle->game->renderer, (vec4i_t) {255, 114, 247, 255}, (vec4i_t) { 119, 99, 249, 100 });
