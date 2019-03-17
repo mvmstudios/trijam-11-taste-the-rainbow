@@ -28,6 +28,8 @@ extern int window_height;
 
 Mix_Music* default_theme_music;
 
+Mix_Chunk* explode_effect_sound;
+
 typedef struct SkittleDropper {
     game_t* game;
 
@@ -90,6 +92,9 @@ game_t* game_create(SDL_Renderer* renderer) {
     heart_sprite = sprite_create(renderer, "assets/img/heart.png", false, false, (vec2i_t) { 13, 12 }, 0, (vec2i_t) { 0, 0 });
     heart_sprite->size.x = 48;
     heart_sprite->size.y = 48;
+
+    explode_effect_sound = Mix_LoadWAV("assets/sound/explode.wav");
+    Mix_VolumeChunk(explode_effect_sound, MIX_MAX_VOLUME / 4);
 
     skittles = malloc(sizeof(skittle_t*) * 1024);
     bombs = malloc(sizeof(bomb_t) * 1024);
