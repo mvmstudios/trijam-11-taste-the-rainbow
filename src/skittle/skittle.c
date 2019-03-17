@@ -22,6 +22,9 @@ skittle_t* skittle_create(game_t* game, vec2i_t init_pos) {
 
     skittle->sprite->position = init_pos;
 
+    skittle->sprite->size.x = 9 * 3;
+    skittle->sprite->size.y = 4 * 3;
+
     return skittle;
 }
 
