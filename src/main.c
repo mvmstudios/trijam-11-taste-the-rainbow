@@ -76,6 +76,8 @@ int main(int argc, char** argv) {
         frame_count++;
     }
 
+    game_destroy(game);
+
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
