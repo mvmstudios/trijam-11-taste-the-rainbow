@@ -9,6 +9,7 @@
 #include "sprite/sprite.h"
 #include "floor/floor.h"
 #include "skittle/skittle.h"
+#include "bomb/bomb.h"
 
 bool debug = false;
 
@@ -16,7 +17,9 @@ sprite_t* rainbow_sprite;
 
 floor_t* _floor;
 skittle_t** skittles;
+bomb_t** bombs;
 
+int current_bomb_index = 0;
 int current_skittle_index = 0;
 
 extern int window_width;
@@ -59,7 +62,7 @@ void skittle_dropper_update(skittle_dropper_t* dropper, uint64_t frame_count) {
     // only works properly with vsync
     if (frame_count % 60 * 2 == 0) {
         skittles[current_skittle_index++] = skittle_create(dropper->game, (vec2i_t) {dropper->hitbox->x, dropper->hitbox->y});
-        dropper->velocity.x += 0.02;
+       // dropper->velocity.x += 0.02;
     }
 
 }
@@ -84,6 +87,7 @@ game_t* game_create(SDL_Renderer* renderer) {
     rainbow_sprite->size.y = window_height * 0.20;
 
     skittles = malloc(sizeof(skittle_t*) * 1024);
+    bombs = malloc(sizeof(bomb_t) * 1024);
 
     default_theme_music =  Mix_LoadMUS("assets/sound/def_theme.wav");
 
@@ -97,6 +101,7 @@ game_t* game_create(SDL_Renderer* renderer) {
 
 void game_destroy(game_t* game) {
     free(skittles);
+    free(bombs);
 }
 
 void game_update(game_t* game, const float delta_time, const float global_time, const uint64_t frame_count) {
@@ -112,6 +117,10 @@ void game_update(game_t* game, const float delta_time, const float global_time, 
 
         for (int i = 0; i < current_skittle_index; i++)
             skittle_update(skittles[i], global_time);
+
+        for (int i = 0; i < current_bomb_index; i++) {
+            bomb_update(bombs[i], global_time);
+        }
     }
 }
 
@@ -131,6 +140,9 @@ void game_render(const game_t* game) {
 
         for (int i = 0; i < current_skittle_index; i++)
             skittle_render(skittles[i]);
+
+        for (int i = 0; i < current_bomb_index; i++)
+            bomb_render(bombs[i]);
 
         sprite_render(rainbow_sprite);
     }
