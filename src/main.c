@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 
 #include "game.h"
 #include "player/player.h"
@@ -13,7 +14,7 @@ float global_time = 0;
 uint64_t frame_count = 0;
 
 int main(int argc, char** argv) {
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) != 0) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) != 0) {
         printf("error initializing sdl: %s\n", SDL_GetError());
         return -1;
     }
@@ -33,6 +34,10 @@ int main(int argc, char** argv) {
         SDL_DestroyWindow(window);
         SDL_Quit();
 
+        return -1;
+    }
+
+    if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
         return -1;
     }
 
