@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "game.h"
 #include "player/player.h"
@@ -12,6 +13,8 @@ int window_height = 600;
 
 float global_time = 0;
 uint64_t frame_count = 0;
+
+TTF_Font* font;
 
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_AUDIO) != 0) {
@@ -40,6 +43,14 @@ int main(int argc, char** argv) {
     if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
         return -1;
     }
+
+    if (!TTF_Init()) {
+        return -1;
+    }
+
+    font = TTF_OpenFont("assets/font/bulky.TTF", 28);
+    if (font == NULL)
+        return -1;
 
     SDL_RenderSetLogicalSize(renderer, window_width, window_height);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
