@@ -17,6 +17,6 @@ hitbox_t* hitbox_create(int x, int y, int width, int height);
 
 bool hitbox_collide(hitbox_t* hitbox_1, hitbox_t* hitbox_2);
 
-bool hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer);
+void hitbox_render(hitbox_t* hitbox, SDL_Renderer* renderer);
 
 #endif
