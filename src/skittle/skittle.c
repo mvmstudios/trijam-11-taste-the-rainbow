@@ -38,8 +38,6 @@ void skittle_update(skittle_t* skittle, float global_time) {
 
     skittle->hitbox->y = skittle->position.y;
     skittle->sprite->position.y = skittle->position.y;
-
-    printf("sprite -> %d | hitbox -> %d\n", skittle->sprite->position.y, skittle->hitbox->y);
 }
 
 void skittle_render(skittle_t* skittle) {
