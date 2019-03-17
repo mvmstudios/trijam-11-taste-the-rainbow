@@ -8,7 +8,9 @@
 typedef enum GameState {
     GAME_STATE_MENU,
     GAME_STATE_PAUSE,
-    GAME_STATE_RUNNING
+    GAME_STATE_RUNNING,
+    GAME_STATE_LOSE,
+    GAME_STATE_RESTART
 } game_state_t;
 
 typedef struct Game {
