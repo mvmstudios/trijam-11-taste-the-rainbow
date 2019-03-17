@@ -21,7 +21,7 @@ bool hitbox_collide(hitbox_t* hitbox_1, hitbox_t* hitbox_2) {
     hitbox_t* y_max_hitbox = hitbox_1->y > hitbox_2->y ? hitbox_1 : hitbox_2;
 
     if (x_min_hitbox->x + x_min_hitbox->width > x_max_hitbox->x) {
-        if (y_min_hitbox->y + y_max_hitbox->height > y_max_hitbox->y) {
+        if (y_min_hitbox->y + y_min_hitbox->height > y_max_hitbox->y) {
             return true;
         }
     }
@@ -34,7 +34,7 @@ void hitbox_render_colored(hitbox_t* hitbox, SDL_Renderer* renderer, vec4i_t out
 
     SDL_SetRenderDrawColor(renderer, outline_color.x, outline_color.y, outline_color.z, outline_color.w);
     SDL_RenderDrawRect(renderer, &rect);
-    
+
     SDL_SetRenderDrawColor(renderer, fill_color.x, fill_color.y, fill_color.z, fill_color.w);
     SDL_RenderFillRect(renderer, &rect);
 
