@@ -87,6 +87,11 @@ int main(int argc, char** argv) {
         game_render(game);
 
         SDL_RenderPresent(renderer);
+
+        if (game->game_state == GAME_STATE_RESTART) {
+            SDL_Delay(1000);
+            close_requested = true;
+        }
     
         uint64_t performance_counter_at_end = SDL_GetPerformanceCounter();
         uint64_t elapsed = performance_counter_at_end - performance_counter;

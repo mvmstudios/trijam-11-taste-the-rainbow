@@ -110,5 +110,5 @@ void player_damage(player_t* player, int damage) {
 }
 
 void player_die(player_t* player) {
-
+    player->game->game_state = GAME_STATE_RESTART;
 }
