@@ -30,8 +30,6 @@ bomb_t* bomb_create(game_t* game, vec2i_t init_pos) {
     bomb->sprite->size.x = 16 * 2;
     bomb->sprite->size.y = 16 * 2;
 
-    bomb->sprite->current_sprite_index = 0;
-
     bomb->hitbox = hitbox_create(bomb->position.x, bomb->position.y, bomb->sprite->size.x, bomb->sprite->size.y);
 
     return bomb;
