@@ -1,6 +1,8 @@
 #ifndef SKITTLE_H_
 #define SKITTLE_H_
 
+#include <stdbool.h>
+
 #include "../game.h"
 #include "../math/mvmath.h"
 #include "../sprite/sprite.h"
@@ -8,6 +10,8 @@
 
 typedef struct Skittle {
     game_t* game;
+
+    bool disabled;
 
     vec2i_t position;
 
