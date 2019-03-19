@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/taste-the-rainbow
+taste-the-rainbow.so
+taste-the-rainbow.dylib
+taste-the-rainbow.dll
+taste-the-rainbow.a
+taste-the-rainbow.lib
+taste-the-rainbow-test-*
+*.exe
+*.o
+*.obj
+*.lst
+
