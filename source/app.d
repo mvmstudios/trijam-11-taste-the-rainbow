@@ -21,5 +21,10 @@ void main() {
 					break;
 			}
 		}
+
+		game.update(0.0);
+		game.render(renderer);
+
+		SDL_RenderPresent(renderer);
 	}
 }
