@@ -3,3 +3,6 @@ description "game"
 authors "Maurice Schmidt"
 copyright "Copyright © 2019, Maurice Schmidt"
 license "proprietary"
+
+dependency "bindbc-sdl" version="~>0.6.1"
+versions "BindSDL_Image" "BindSDL_TTF"
