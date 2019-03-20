@@ -3,18 +3,18 @@ module taste_the_rainbow.game;
 final class Game {
 
     private:
-        Game instance;
+        static Game _instance;
 
     public:
         this() {
-            instance = this;
+            _instance = this;
         }
 
         static Game instance() {
-            if (!instance)
-                instance = new Game;
+            if (!_instance)
+                _instance = new Game;
 
-            return instance;
+            return _instance;
         }
     
 }
