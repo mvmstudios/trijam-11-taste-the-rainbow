@@ -25,11 +25,13 @@ class Player : Entity {
 
     public:
         void update(float deltaTime) {
-
         }
 
         void render(SDL_Renderer* renderer) {
-            
+            SDL_Rect rect = SDL_Rect(0, 0, 64, 64);
+
+            SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+            SDL_RenderDrawRect(renderer, &rect);
         }
 
 }
